@@ -1,28 +1,13 @@
 import edu.wpi.first.deployutils.deploy.artifact.FileTreeArtifact
 import edu.wpi.first.gradlerio.deploy.roborio.FRCJavaArtifact
 import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
-	java
-	kotlin("jvm") version "1.8.0"
+	scala
 	id("edu.wpi.first.GradleRIO") version "2023.4.2"
 }
 
-java {
-	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
-	}
-}
-
-tasks.withType<KotlinCompilationTask<*>> {
-	compilerOptions {
-		languageVersion.set(KotlinVersion.KOTLIN_1_8)
-	}
-}
-
-val robotMainClass = "frc.robot.MainKt"
+val robotMainClass = "frc.robot.main"
 
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project DeployUtils.
@@ -50,6 +35,8 @@ wpi.java.debugJni.set(false)
 val includeDesktopSupport = true
 
 dependencies {
+	implementation("org.scala-lang:scala3-library_3:3.2.1")
+
 	wpi.java.deps.wpilib().forEach { implementation(it) }
 	wpi.java.vendor.java().forEach { implementation(it) }
 
