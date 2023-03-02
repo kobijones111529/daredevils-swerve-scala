@@ -35,7 +35,7 @@ wpi.java.debugJni.set(false)
 val includeDesktopSupport = true
 
 dependencies {
-	implementation("org.scala-lang:scala3-library_3:3.2.1")
+	implementation("org.scala-lang:scala3-library_3:3.2.2")
 
 	wpi.java.deps.wpilib().forEach { implementation(it) }
 	wpi.java.vendor.java().forEach { implementation(it) }
